@@ -1,25 +1,25 @@
 # Redshift ETL using PDI
 
-After configuring PDI JDBC connection
+Showing multiple ETL jobs that implement data warehousing techniques using Pentaho Kettle and Amazon Redshift.
 
-## Objective
+## Tools
 
-The goal of this ETL job is to demonstrate basic data extraction from multiple dimensional tables hosted locally on a MySQL database and loading these tables into Amazon Redshift using Pentaho Data Integration (PDI).
+- Pentaho Data Integration connected to Amazon Redshift using JDBC driver.
+- Up & running Redshift cluster, basic configuration (2 dense-compute nodes).
+- Proper Amazon IAM roles to allow Redshift access S3 buckets.
 
-## Method
-
-Both MySQL and Redshift tables have the same schema, so this is not an OLTP to Data Warehouse CDC or Pipeline, it is merely basic dimensional-table to dimensional-table mapping to examine the best way to move data from local database to Amazon Redshift. Assuming that Redshift dimensional tables are empty and never been populated, we are going to extract the data from MySQL database, compress it using GZIP codec, stage the data in Amazon S3 bucket, and then pulling the compressed data from S3 bucket into Redshift tables.
-
-The following are some of the best Redshift data loading practices that have been followed in this demo:
+The following are some of the best Redshift data loading best-practices that have been followed in these tasks:
 
 - Loading data in bulk:
-  Using Amazon S3 to stage & accumulate data (could be from multiple sources) before executing a bulk `COPY` operation. Staging on S3 also allow us to use some of Redshift features such as _manifest file_.
+  Using Amazon S3 to stage & accumulate data (could be from multiple sources) before executing a bulk `COPY` operation. Staging data on S3 allows using some Redshift features such as _manifest file_.
 - Compressing data files:
-  Compressing data (e.g. in GZIP) reduces `COPY` command time and further improves Redshift cluster performance.
+  Compressing data (e.g. in GZIP) reduces `COPY` command processing time and further improves Redshift cluster performance.
 
-There are multiple techniques that enhance ETL jobs performance on Redshift depending on the complexity of the job.
+There are multiple techniques that enhance ETL performance on Redshift depending on the complexity of the job.
 
 ## 1. Basic ETL
+
+The goal of this ETL job is to demonstrate basic data extraction from multiple dimensional tables hosted locally on a MySQL database and loading these tables into Amazon Redshift using Pentaho Data Integration (PDI). Both MySQL and Redshift tables have the same schema, so this is not an OLTP to Data Warehouse CDC or Pipeline, it is merely basic dimensional-table to dimensional-table mapping to examine the best way to move data from local database to Amazon Redshift.
 
 The following screenshot summarizes the entire ETL job:
 
@@ -36,6 +36,8 @@ The following screenshot summarizes the entire ETL job:
 5. Finally, adding two email notifications, one for success & another for failure.
 
 The total number of records is small (around 2.5 million) so it took around ~40 seconds to process the entire job.
+
+---
 
 ## 2. Surrogate Key Pipeline
 
