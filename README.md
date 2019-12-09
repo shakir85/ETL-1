@@ -8,7 +8,7 @@ Showing multiple ETL jobs that implement data warehousing techniques using Penta
 - Up & running Redshift cluster, basic configuration (2 dense-compute nodes).
 - Proper Amazon IAM roles to allow Redshift access S3 buckets.
 
-The following are some of the best Redshift data loading best-practices that have been followed in these tasks:
+Redshift data loading best-practices that have been followed in these tasks:
 
 - Loading data in bulk:
   Using Amazon S3 to stage & accumulate data (could be from multiple sources) before executing a bulk `COPY` operation. Staging data on S3 allows using some Redshift features such as _manifest file_.
