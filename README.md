@@ -1,7 +1,6 @@
 # Redshift ETL using PDI
 
-Showing multiple ETL jobs that implement data warehousing techniques using Pentaho Kettle and Amazon Redshift.
-
+Implementing ETL workflow and applying data warehousing techniques using Pentaho Data Integration for ETL, Amazon S3 for data staging and Redshift DW.
 ## Tools
 
 - Pentaho Data Integration connected to Amazon Redshift using JDBC driver.
